@@ -38,3 +38,16 @@
     font-size: 12px;
     margin: 4px 2px 8px;
 }
+
+.Card-Action {
+    top: 0px;
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.Card-Action-Fav {
+    cursor: pointer;
+    margin: 2px 4px;
+}
