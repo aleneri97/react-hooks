@@ -1,14 +1,18 @@
 import './App.css';
 import { Characters } from './components/Characters';
 import { Header } from './components/Header';
+import { ThemeContext } from './contexts/ThemeContext';
+import { useTheme } from './hooks/useTheme';
 
 function App() {
+  const initialTheme = useTheme();
   return (
-    <div className="App">
-      <h1>¡Hola mundo!</h1>
-      <Header />
-      <Characters />
-    </div>
+    <ThemeContext.Provider value={initialTheme}>
+      <div className={`App ${initialTheme.theme.theme}`}>
+        <Header />
+        <Characters />
+      </div>
+    </ThemeContext.Provider>
   );
 }
 

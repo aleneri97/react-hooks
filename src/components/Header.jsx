@@ -1,17 +1,18 @@
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
+import { ThemeContext } from '../contexts/ThemeContext';
 
 export const Header = () => {
-	const [darkMode, setDarkMode] = useState(false);
+	const { theme, toggleTheme } = useContext(ThemeContext)
 
 	const handleDarkToggle = () => {
-		setDarkMode(!darkMode);
+		toggleTheme();
 	};
 
 	return (
 		<div className='Header'>
 			<h1>React Hook</h1>
 			<button type='button' onClick={handleDarkToggle}>
-				Mode: {darkMode ? 'Dark' : 'Light'}
+				Mode: {theme.theme}
 			</button>
 		</div>
 	);
