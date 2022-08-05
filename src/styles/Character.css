@@ -1,0 +1,40 @@
+.Card {
+    border-radius: 16px;
+    color: white;
+    height: 240px;
+    margin: 8px auto;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    transition: .8s;
+    width: 320px;
+}
+
+.Card:hover {
+    transition:  0.2s;
+    box-shadow: rgb(156, 156, 156) 0px 4px 8px;
+}
+
+.Card-Content {
+    backdrop-filter: blur(2px);
+    background-color: rgba(50, 50, 50, 0.72);
+    bottom: 0px;
+    position: absolute;
+    width: 100%;
+}
+
+.Card-Image {
+    border-radius: 8px;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.Card-Title {
+    margin: 6px 2px 2px;
+}
+
+.Card-Subtitle {
+    font-size: 12px;
+    margin: 4px 2px 8px;
+}
