@@ -1,11 +1,15 @@
-import React, { useReducer } from 'react'
+import React from 'react'
 import '../styles/Character.css';
 
 
 export const Character = ({ data, favToggle }) => {
 
 	const handleFavToggle = (favorite) => {
-		favToggle({type: 'ADD_TO_FAVORITE', payload: data.character});
+    if (data.favorite) {
+      favToggle({ type: 'REMOVE_FAVORITE', payload: data.character });
+    } else {
+      favToggle({type: 'ADD_TO_FAVORITE', payload: data.character});
+    }
 	};
 
   return (
