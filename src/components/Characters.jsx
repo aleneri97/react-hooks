@@ -1,4 +1,4 @@
-import React, {useEffect, useReducer, useState} from 'react';
+import React, {useEffect, useReducer, useState, useMemo} from 'react';
 import { Character } from './Character';
 import '../styles/Characters.css';
 
@@ -19,6 +19,7 @@ const favoriteReducer = (state, action) => {
 export const Characters = () => {
 	const [favorites, dispatchFav] = useReducer(favoriteReducer, initialState);
 	const [characters, setCharacters] = useState([]);
+	const [search, setSearch] = useState('');
 	
 	const isFavorite = (character) => {
 		// !!favorites.favorites.find(f => f.id === character.id);
@@ -30,9 +31,27 @@ export const Characters = () => {
 			.then(data => setCharacters(data.results));
 	}, []);
 
+	const handleSearch = (event) => {
+		setSearch(event.target.value);
+	};
+
+	// const filteredCharacters = characters.filter(user => {
+	// 	return user.name.toLowerCase().includes(search.toLowerCase());
+	// });
+
+	const filteredCharacters = useMemo(() =>
+		characters.filter(user => user.name.toLowerCase().includes(search.toLowerCase())),
+		[characters, search]
+	);
+
 	return (
 		<div className='Characters'>
-			{characters.map((character) => (
+
+			<div className="Search">
+				<input type="text" placeholder="Search term: Morty, Rick..." value={search} onChange={handleSearch} />
+			</div>
+			
+			{filteredCharacters.map((character) => (
 				<Character key={character.id} data={{character, favorite: isFavorite(character)}} favToggle={dispatchFav} />
 			))}
 		</div>
