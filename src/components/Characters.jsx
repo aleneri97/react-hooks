@@ -1,4 +1,4 @@
-import React, {useEffect, useReducer, useState, useMemo} from 'react';
+import React, {useEffect, useReducer, useState, useMemo, useRef} from 'react';
 import { Character } from './Character';
 import '../styles/Characters.css';
 
@@ -20,6 +20,7 @@ export const Characters = () => {
 	const [favorites, dispatchFav] = useReducer(favoriteReducer, initialState);
 	const [characters, setCharacters] = useState([]);
 	const [search, setSearch] = useState('');
+	const searchInput = useRef(null);
 	
 	const isFavorite = (character) => {
 		// !!favorites.favorites.find(f => f.id === character.id);
@@ -31,13 +32,9 @@ export const Characters = () => {
 			.then(data => setCharacters(data.results));
 	}, []);
 
-	const handleSearch = (event) => {
-		setSearch(event.target.value);
+	const handleSearch = () => {
+		setSearch(searchInput.current.value);
 	};
-
-	// const filteredCharacters = characters.filter(user => {
-	// 	return user.name.toLowerCase().includes(search.toLowerCase());
-	// });
 
 	const filteredCharacters = useMemo(() =>
 		characters.filter(user => user.name.toLowerCase().includes(search.toLowerCase())),
@@ -48,7 +45,7 @@ export const Characters = () => {
 		<div className='Characters'>
 
 			<div className="Search">
-				<input type="text" placeholder="Search term: Morty, Rick..." value={search} onChange={handleSearch} />
+				<input type="text" placeholder="Search term: Morty, Rick..." ref={searchInput} value={search} onChange={handleSearch} />
 			</div>
 			
 			{filteredCharacters.map((character) => (
